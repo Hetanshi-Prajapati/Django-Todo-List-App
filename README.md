@@ -11,12 +11,14 @@ It allows users to add, update, complete, and delete tasks with a user-friendly 
 - Mark tasks as completed (strike-through effect)
 - Checkboxes for task completion
 - Dark and Light theme toggle with symbol
+- Data is stored securely in a local MySQL Workbench database
 
 ## Technologies Used
 - Python
 - Django
 - HTML, CSS (Basic templates)
 - JavaScript (for theme switching and checkbox functionality)
+-MySQL Workbench database
 
 ## Project Structure
 ```text
