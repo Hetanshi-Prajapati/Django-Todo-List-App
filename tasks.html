@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- <link rel="stylesheet" href="style2.css"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .update-btn {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #ffffff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .task-text {
+            flex: 1;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+
+        /* Dark Mode Styling */
+        .dark-mode {
+            background-color: #222;
+            color: white;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .container {
+            background: #333;
+            color: white;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .dark-mode h1 {
+            color: white;
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .update-btn {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #ffffff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dark-mode li {
+            background: #444;
+        }
+
+        .task-text {
+            flex: 1;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* Dark Mode Toggle Button */
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .toggle-btn i {
+            color: black;
+        }
+
+        .dark-mode .toggle-btn i {
+            color: white;
+        }
+
+        .update {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #upcontainer {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 40%;
+            overflow: auto;
+            background: #222;
+            /* background-color: rgba(0, 0, 0, 0.4); */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* :root {
+    --background-light: #222;
+    --background-dark: #fff;
+}
+
+.dark-theme #upcontainer {
+    background: var(--background-dark);
+    color: #000; /* Ensure text is visible 
+}
+
+.light-theme #upcontainer {
+    background: var(--background-light);
+    color: #fff; /* Ensure text is visible 
+} */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent black */
+            z-index: 0.5;
+            /* Lower than the modal’s z-index=1 here */
+        }
+    </style>
+</head>
+
+<body>
+    <button class="toggle-btn" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="container">
+        <h1>To-Do List</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Task Creation Form -->
+        <form method="post" onsubmit="return popupadd()">
+            {% csrf_token %}
+            <input type="text" name="ntask" placeholder="Enter your Task..."> <!--required>-->
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+
+        <!-- Add id -->
+        <h2>Tasks</h2>
+        <ul>
+            {% for task in tasks %}
+            <li>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="toggle_id" value="{{task.id}}">
+                    <input type="checkbox" onclick="this.form.submit()" {% if task.completed %}checked{% endif %}>
+                </form>
+                {% if task.completed %}
+                    <span class="task-text"><s>{{ forloop.counter }}. {{ task }}</s></span>
+                {% else %}
+                    <span class="task-text">{{ forloop.counter }}. {{ task }}</span>
+                {% endif %}
+                <div class="task-buttons">
+                    <!-- Update Form -->
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if not task.completed %}
+                            <button id="toggleup" type="button" class="update-btn" onclick="OpenModel('{{task.id}}')">Update</button>
+                        {% else %}
+                            <button type="button" class="update-btn" onclick="checkblock()">Update</button><!--disabled-->
+                        {% endif %}
+                    </form>
+
+                    <!-- Delete Form -->
+                    <form method="post" id="deleteForm{{ task.id }}" onsubmit="return popupdel('{{ task.id }}')">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_id" id="delid" value="{{task.id}}">
+                        <button type="submit" class="delete-btn" onsubmit="popupdel('{{ task.id }}')">Delete</button>
+                    </form>
+                </div>
+            </li>
+            {% empty %}
+            <li>No tasks added yet.</li>
+            {% endfor %}
+        </ul>
+
+        <div id="overlay" style="display: none;"></div>
+        <div id="upcontainer" style="display: none;">
+
+            <span onclick="CloseModel()" style="color: #f4f4f4;">&times;</span>
+            <h2 style="color: #f4f4f4;">Update Task</h2>
+
+            <form method="post" id="updateform" onsubmit="return popupdate()">
+                {% csrf_token %}
+                <input type="hidden" id="update_id" name="update_id" value="{{task_id}}"><!--value=""-->
+                <input type="text" id="utask" name="task" placeholder="Enter updated task"><!--required-->
+                <br><br><br>
+                <button type="submit" class="update">Update</button>
+                <button type="button" class="cancel" onclick="CloseModel()">Cancel</button>
+                <!--if type = submit it not work properly and display : task cannot be empty, so use type = button-->
+                <style>
+                    .update,
+                    .cancel {
+                        margin-right: 30px;
+                    }
+                </style>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function checkblock() {
+            alert("You cannot update a completed task.");
+        }
+        function popupadd() {
+            let ntask = document.querySelector('input[name="ntask"]').value;
+            if (ntask.trim() === "") {
+                alert("Task cannot be empty");
+                return false;
+            }
+            alert("Task Added Successfully");
+            return true;
+        }
+        function popupdate() {
+            let taskInput = document.getElementById('utask').value;
+            if (taskInput.trim() == "") {
+                alert("Task cannot be empty");
+                return false;
+            }
+            alert("Task Updated Successfully");
+            return true; // Allow form submission
+            CloseModel();
+        }
+        function OpenModel(task_id) {
+            document.getElementById('update_id').value = task_id; //update_id is id of hidden input field //task_id parameter//ets the value of the hidden input field with the id of update_id to the task_id of the task being updated
+            document.getElementById('utask').value = "";//task;//utask is id of input field //task parameter// set the value of the input field with the id of utask to the value of ntask.
+            document.getElementById('overlay').style.display = "block"; // Show overlay when modal is open
+            document.getElementById('upcontainer').style.display = "block";
+        }
+        function CloseModel() {
+            document.getElementById('overlay').style.display = "none"; // Hide overlay when modal is closed
+            document.getElementById('upcontainer').style.display = "none";
+            //document.getElementById('utask').value = ""; // Clear input field when closing
+        }
+        function popupdel(taskId) {
+            if (confirm("Are you sure you want to delete this task?")) {
+                alert("Task deleted successfully!");  //success message
+                document.getElementById("deleteForm" + taskId).submit();
+
+            }
+            return false;
+        }
+        window.onload = function () {
+            let savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark mode
+            let body = document.body;//in body-> body of the document
+            let icon = document.querySelector('.toggle-btn i');// Select the icon inside the toggle button
+
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');//classList is a property of the body object that returns a DOMTokenList representing the class attribute of the element
+                icon.classList.remove('fa-moon', 'fa-sun'); // Remove moon icon in dark mode
+                icon.classList.add('fa-sun');  // Show sun icon in dark mode
+                icon.style.color = "white";    // Sun icon should be white in dark mode
+            } else {
+                body.classList.remove('dark-mode');
+                icon.classList.remove('fa-moon', 'fa-sun'); // Remove sun icon in light mode
+                icon.classList.add('fa-moon'); // Show moon icon in light mode
+                icon.style.color = "black";    // Moon icon should be black in light mode
+            }
+        };
+
+        function toggleTheme() {
+            let body = document.body;
+            let icon = document.querySelector('.toggle-btn i');
+            let isDarkMode = body.classList.toggle('dark-mode');//contains('dark-mode');
+
+            if (isDarkMode) {
+                icon.classList.remove('fa-moon', 'fa-sun');
+                icon.classList.add('fa-sun');
+                icon.style.color = "white";  // Sun should be white in dark mode
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-moon', 'fa-sun');
+                icon.classList.add('fa-moon');
+                icon.style.color = "black";  // Moon should be black in light mode
+                localStorage.setItem('theme', 'light');
+            }
+        }
+    </script>
+</body>
+</html>
