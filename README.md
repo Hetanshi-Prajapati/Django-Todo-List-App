@@ -18,7 +18,7 @@ It allows users to add, update, complete, and delete tasks with a user-friendly 
 - Django
 - HTML, CSS (Basic templates)
 - JavaScript (for theme switching and checkbox functionality)
--MySQL Workbench database
+- MySQL Workbench database
 
 ## Project Structure
 ```text
